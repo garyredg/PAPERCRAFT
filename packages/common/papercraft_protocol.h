@@ -68,8 +68,10 @@ typedef struct {
     PcHeader hdr;
     unsigned int cmd_sequence;
     unsigned int cmd_time_ms;
-    float move_x; /* -1..1, world-space-relative-to-camera-yaw movement input, real analog */
-    float move_z; /* -1..1 */
+    /* World-space movement vector produced from camera-relative local input by the client.
+       Keeping the camera itself client-local leaves the server authoritative over movement. */
+    float move_x; /* -1..1, real analog */
+    float move_z; /* -1..1, real analog */
     unsigned int buttons; /* PC_BTN_* bitmask */
 } PcUserCmdPacket;
 

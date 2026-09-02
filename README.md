@@ -139,7 +139,8 @@ to a real file instead. Matters most on Windows: `PLAY.bat`/`PLAY_ONLINE.bat` la
 a fast failure (the real, mandatory worldapi-fetch-on-launch check failing before the SDL window
 even opens, for instance) is otherwise just a flash with nothing left to read afterward.
 
-Controls: WASD to move, Space to jump (hold Ctrl/Shift + tap Space for a real slide-jump boost),
+Controls: WASD to move relative to the camera (W moves toward the view direction; A/D strafe),
+Space to jump (hold Ctrl/Shift + tap Space for a real slide-jump boost),
 E to punch whatever's in reach, 1–5 to spend a talent point once you have one.
 
 ## Docs

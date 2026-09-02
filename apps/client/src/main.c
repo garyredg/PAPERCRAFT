@@ -1492,6 +1492,18 @@ int main(int argc, char **argv) {
             if (SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_B)) buttons |= PC_BTN_CROUCH;
         }
 
+        /* Movement is expressed in the camera's horizontal frame before it crosses the wire.
+           This keeps W/forward pointing where the player is looking, A/D strafing relative to
+           that view, and the left stick aligned with the same controls.  The server intentionally
+           remains unaware of the purely client-local orbit camera: it receives the resulting
+           world-space vector and retains authoritative movement/collision simulation. */
+        {
+            float camera_move_x = move_x * cosf(cam_yaw) + move_z * sinf(cam_yaw);
+            float camera_move_z = -move_x * sinf(cam_yaw) + move_z * cosf(cam_yaw);
+            move_x = camera_move_x;
+            move_z = camera_move_z;
+        }
+
         /* Real "menu pauses movement" -- while the real inventory list is open, WASD/stick/jump/
            crouch input is real, deliberately zeroed rather than sent through, so browsing the
            list doesn't also walk the character around or trigger a jump. A real, empty UserCmd
